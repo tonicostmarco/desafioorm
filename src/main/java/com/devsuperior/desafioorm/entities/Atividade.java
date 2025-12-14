@@ -2,6 +2,9 @@ package com.devsuperior.desafioorm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -16,6 +19,9 @@ public class Atividade {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "atividade")
+    private List<Participante> participantes = new ArrayList<>();
 
 
     public Atividade() {
@@ -66,5 +72,18 @@ public class Atividade {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void addParticipante(Participante participante) {
+        participantes.add(participante);
+        participante.setAtividade(this);
+    }
+    public void removeParticipante(Participante participante) {
+        participantes.remove(participante);
+        participante.setAtividade(null);
     }
 }

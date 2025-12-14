@@ -16,8 +16,8 @@ public class Atividade {
     private String descricao;
     private Double preco;
 
-    @OneToOne(mappedBy = "atividade", cascade = CascadeType.ALL)
-    private Bloco bloco;
+    @OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL)
+    private List<Bloco> blocos = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -88,5 +88,13 @@ public class Atividade {
     public void removeParticipante(Participante participante) {
         participantes.remove(participante);
         participante.setAtividade(null);
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
+    }
+    public void addBloco(Bloco bloco) {
+        blocos.add(bloco);
+        bloco.setAtividade(this);
     }
 }

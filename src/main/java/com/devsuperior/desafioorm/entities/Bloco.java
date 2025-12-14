@@ -16,8 +16,8 @@ public class Bloco {
     private Instant inicio;
     private Instant fim;
 
-    @OneToOne
-    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")
     private Atividade atividade;
 
     public Bloco() {

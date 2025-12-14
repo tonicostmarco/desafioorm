@@ -9,7 +9,7 @@ public class Participante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nome;
     private String email;
 
     @ManyToOne
@@ -19,9 +19,9 @@ public class Participante {
     public Participante() {
     }
 
-    public Participante(Integer id, String name, String email, Atividade atividade) {
+    public Participante(Integer id, String nome, String email, Atividade atividade) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.email = email;
         this.atividade = atividade;
     }
@@ -35,11 +35,11 @@ public class Participante {
     }
 
     public String getName() {
-        return name;
+        return nome;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nome = name;
     }
 
     public String getEmail() {

@@ -2,6 +2,8 @@ package com.devsuperior.desafioorm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "tb_participante")
 public class Participante {
@@ -56,5 +58,17 @@ public class Participante {
 
     public void setAtividade(Atividade atividade) {
         this.atividade = atividade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Participante that = (Participante) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

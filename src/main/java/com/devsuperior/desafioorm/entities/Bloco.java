@@ -3,6 +3,7 @@ package com.devsuperior.desafioorm.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_bloco")
@@ -59,5 +60,17 @@ public class Bloco {
 
     public void setAtividade(Atividade atividade) {
         this.atividade = atividade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Bloco bloco = (Bloco) o;
+        return Objects.equals(id, bloco.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

@@ -2,7 +2,7 @@ package com.devsuperior.desafioorm.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_participante")
@@ -14,18 +14,19 @@ public class Participante {
     private String nome;
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "atividade_id")
-    private Atividade atividade;
+    @ManyToMany
+    @JoinTable(name = "tb_participante_atividade",
+            joinColumns = @JoinColumn(name = "participante_id"),
+            inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Participante() {
     }
 
-    public Participante(Integer id, String nome, String email, Atividade atividade) {
+    public Participante(Integer id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.atividade = atividade;
     }
 
     public Integer getId() {
@@ -36,12 +37,12 @@ public class Participante {
         this.id = id;
     }
 
-    public String getName() {
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -52,12 +53,8 @@ public class Participante {
         this.email = email;
     }
 
-    public Atividade getAtividade() {
-        return atividade;
-    }
-
-    public void setAtividade(Atividade atividade) {
-        this.atividade = atividade;
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
 
     @Override
